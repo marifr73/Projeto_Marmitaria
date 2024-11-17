@@ -72,43 +72,70 @@ button {
     cursor: pointer;
 }
 
-.header { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    border-bottom: 1px #444 solid; 
-    color: white; padding: 10px 20px; 
-} 
-
-.logo img { 
-    max-width: 150px;  
-    max-height: 120px; 
-}
-
-.menu { 
-    display: flex; 
-    align-self: flex-end; 
-    margin-bottom: 10px; 
-    color: white; 
-} 
-
-.menu a { 
-    padding: 10px; 
-    color: white; 
-} 
-
-.menu a:hover { 
-    color: #f6f3f8; 
-    background-color: #666666; 
-    border-radius: 10px; 
-} 
-
-a { 
-    text-decoration: none; 
-    color: white; 
-}
-
-ul { 
-    list-style: none; 
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px #444 solid;
     color: white;
+    padding: 10px 20px;
+}
+
+.logo img {
+    max-width: 150px;
+    max-height: 120px;
+}
+
+.menu {
+    display: flex;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.menu a {
+    padding: 10px;
+    color: white;
+}
+
+.menu a:hover {
+    color: #f6f3f8;
+    background-color: #666666;
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+ul {
+    list-style: none;
+    color: white;
+}
+
+/* Estilo para mensagens de erro */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Estilo para a mensagem de sucesso */
+.success-message {
+    color: green;
+    font-size: 1rem;
+    margin-top: 20px;
+    display: none;
+}
+
+/* Estilo para campos de entrada inválidos */
+input.invalid {
+    border: 2px solid red;
+}
+
+/* Estilo para campos válidos */
+input.valid {
+    border: 2px solid green;
 }
