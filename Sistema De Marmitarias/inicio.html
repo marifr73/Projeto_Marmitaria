@@ -15,11 +15,19 @@
                 <img src="./Logotipo.png" alt="Logo">
             </div>
             <ul class="menu">
-                <li><a href="#">Marmitarias</a></li>
-                <li><a href="#">Como Chegar</a></li>
+                <li><a href="#" id="listar-marmitarias">Marmitarias / Restaurantes</a></li>
+                <li><a href="#" id="cadastrar-btn">Cadastrar Marmitarias</a></li>
                 <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#" id="entrar-btn">Entrar</a></li>
             </ul>
         </header>
-    </div>
+        <div id="lista-marmitarias" style="display:none;">
+            <h2>Lista de Marmitarias e Restaurantes</h2>
+            <ul id="marmitarias-lista">
+                <!-- As marmitas cadastradas serão exibidas aqui -->
+            </ul>
+        </div>
+        
+    <script src="main.js"></script>
 </body>
 </html>
