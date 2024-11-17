@@ -5,37 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Logotipo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <title>Marmitarias São Miguel - Login Marmitaria</title>
+    <title>Marmitarias São Miguel - Cadastro Marmitaria</title>
 </head>
 <body>
-    <h1>Login Marmitaria</h1>
+    <h1>Cadastro de Marmitaria</h1>
+    
     <div class="input-container">
-        <label for="nome">Nome do estabelecimento:</label>
+        <label for="nome">Nome do Estabelecimento:</label>
         <input type="text" id="nome" placeholder="Digite o nome da marmitaria">
+        <span id="nome-error" class="error-message"></span> <!-- Mensagem de erro -->
     </div>
     <br><br>
+    
     <div class="input-container">
-        <label for="tipo">Tipo de documento:</label>
-        <select id="tipo" onchange="ajustarCampo()">
+        <label for="tipo">Tipo de Documento:</label>
+        <select id="tipo" onchange="ajustarCampoDocumento()">
             <option value="cpf">CPF</option>
             <option value="cnpj">CNPJ</option>
         </select>
     </div>
     <br><br>
+    
     <div class="input-container">
-        <label for="documento">CPF/CNPJ:</label>
+        <label for="documento">Documento (CPF/CNPJ):</label>
         <input type="text" id="documento" placeholder="000.000.000-00">
+        <span id="documento-error" class="error-message"></span> <!-- Mensagem de erro -->
     </div>
     <br><br>
+    
     <div class="input-container">
         <label for="num_documento">Nº do Documento:</label>
         <input type="text" id="num_documento" placeholder="AB00000000/0000">
+        <span id="num-documento-error" class="error-message"></span> <!-- Mensagem de erro -->
     </div>
     <br><br>
+    
     <div class="button-container">
-        <a href="login.html"><button type="button">Voltar</button></a>
-        <button type="button" id="btn-submit-marmitaria">Próximo</button>
+        <button type="button" id="btn-submit-marmitaria">Cadastrar</button>
+        <button type="button" onclick="window.location.href='inicio.html'">Cancelar</button>
     </div>
+    
+    <!-- Mensagem de sucesso -->
+    <div id="success-message" class="success-message"></div>
+
     <script src="main.js"></script>
 </body>
 </html>
