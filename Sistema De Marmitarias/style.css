@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+body {
+    background-color: rgb(37, 37, 37);
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+div {
+    color: white;
+    position: relative;
+    font-size: 20px;
+}
+
+.input-container {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    color: white;
+}
+
+input {
+    width: 250px;
+    line-height: 20px;
+    border: 0;
+    outline: 0;
+    font-size: 20px;
+    padding: 0px 50px 0px 20px;
+    background-color: #444;
+    color: white;
+}
+
+.password-container {
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+
+.password-container input {
+    padding: 0px 50px 0px 20px;
+    background-color: #444;
+    color: white;
+}
+
+.password-container i {
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777777;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border-bottom: 1px #444 solid; 
+    color: white; padding: 10px 20px; 
+} 
+
+.logo img { 
+    max-width: 150px;  
+    max-height: 120px; 
+}
+
+.menu { 
+    display: flex; 
+    align-self: flex-end; 
+    margin-bottom: 10px; 
+    color: white; 
+} 
+
+.menu a { 
+    padding: 10px; 
+    color: white; 
+} 
+
+.menu a:hover { 
+    color: #f6f3f8; 
+    background-color: #666666; 
+    border-radius: 10px; 
+} 
+
+a { 
+    text-decoration: none; 
+    color: white; 
+}
+
+ul { 
+    list-style: none; 
+    color: white;
+}
