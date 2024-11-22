@@ -21,6 +21,7 @@ div {
     position: relative;
     text-align: left;
     color: white;
+    margin-bottom: 20px; /* Adicionado espaçamento nos contêineres */
 }
 
 input {
@@ -32,6 +33,17 @@ input {
     padding: 0px 50px 0px 20px;
     background-color: #444;
     color: white;
+    transition: border-color 0.3s, background-color 0.3s; /* Animação de transição */
+}
+
+input:focus, select:focus {
+    border: 2px solid #4CAF50;
+    outline: none;
+    background-color: #555; /* Melhoria no foco dos inputs */
+}
+
+input:hover, select:hover {
+    border-color: #4CAF50; /* Efeito hover em campos de input */
 }
 
 .password-container {
@@ -56,6 +68,10 @@ input {
     color: #777777;
 }
 
+.password-container input:focus {
+    border-color: #4CAF50; /* Estilo quando o input de senha está em foco */
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -70,6 +86,11 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Adiciona uma transição suave */
+}
+
+button:hover {
+    background-color: #555; /* Efeito hover em botões */
 }
 
 .header {
@@ -96,6 +117,7 @@ button {
 .menu a {
     padding: 10px;
     color: white;
+    transition: background-color 0.3s, color 0.3s; /* Adiciona uma transição suave */
 }
 
 .menu a:hover {
@@ -138,4 +160,62 @@ input.invalid {
 /* Estilo para campos válidos */
 input.valid {
     border: 2px solid green;
+}
+
+/* Media query para telas pequenas */
+@media (max-width: 600px) {
+    .input-container, .password-container, input {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+#sobre-nos {
+    display: none;
+    text-align: justify; /* Alinha o texto à esquerda e à direita */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+#sobre-nos h2 {
+    color: #4CAF50; /* Cor do título */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center; /* Centraliza o título */
+}
+
+#sobre-nos p, #sobre-nos ul {
+    color: #ddd; /* Cor do texto */
+    line-height: 1.6;
+}
+
+#sobre-nos ul {
+    list-style-type: none; /* Remove os marcadores de lista */
+    padding: 0;
+}
+
+#sobre-nos ul li {
+    margin-bottom: 10px;
+}
+
+#sobre-nos a {
+    color: #4CAF50; /* Cor dos links */
+    text-decoration: none;
+}
+
+#sobre-nos a:hover {
+    text-decoration: underline;
 }
