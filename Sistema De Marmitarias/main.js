@@ -1,3 +1,45 @@
+let usuarioAtual = null;
+
+// Função para mostrar ou esconder a senha
+function alternarSenha() {
+    const senhaInput = document.getElementById('senha');
+    const iconeSenha = document.getElementById('btn-senha');
+    if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        iconeSenha.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
+    } else {
+        senhaInput.type = 'password';
+        iconeSenha.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
+    }
+}
+
+// Função para validar o login do usuário
+function validarLogin(event) {
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value.trim();
+
+    const emailValido = email.includes('@') && email.includes('.'); 
+    const senhaValida = senha.length >= 8 && /\d/.test(senha) && /[A-Za-z]/.test(senha) && /[!@#$%*?&]/.test(senha);
+
+    if (!emailValido) {
+        alert('Por favor, insira um email válido.');
+        event.preventDefault();
+    } else if (!senhaValida) {
+        alert('A senha deve ter pelo menos 8 caracteres, incluindo números, letras e um caractere especial.');
+        event.preventDefault();
+    } else {
+        alert('Login realizado com sucesso!');
+        usuarioAtual = email; // Armazena o email do usuário logado
+        window.location.href = 'inicio.html';
+    }
+}
+
+function mostrarSobreNos() {
+    document.getElementById('sobre-nos').style.display = 'block';
+    document.getElementById('lista-marmitarias').style.display = 'none';
+    document.getElementById('remover-marmitarias-btn').style.display = 'none';
+}
+
 // Função para obter as marmitarias do localStorage
 function obterMarmitarias() {
     const marmitarias = localStorage.getItem('marmitarias');
@@ -65,19 +107,6 @@ function validarCNPJ(cnpj) {
     return true;
 }
 
-// Função para mostrar ou esconder a senha
-function alternarSenha() {
-    const senhaInput = document.getElementById('senha');
-    const iconeSenha = document.getElementById('btn-senha');
-    if (senhaInput.type === 'password') {
-        senhaInput.type = 'text';
-        iconeSenha.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
-    } else {
-        senhaInput.type = 'password';
-        iconeSenha.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
-    }
-}
-
 // Função para ajustar o campo de documento (CPF ou CNPJ) com base na escolha
 function ajustarCampoDocumento() {
     const tipo = document.getElementById('tipo').value;
@@ -93,24 +122,25 @@ function ajustarCampoDocumento() {
     }
 }
 
-// Função para validar o login do usuário
-function validarLogin(event) {
-    const email = document.getElementById('email').value.trim();
-    const senha = document.getElementById('senha').value.trim();
-
-    const emailValido = email.includes('@') && email.includes('.'); 
-    const senhaValida = senha.length >= 8 && /\d/.test(senha) && /[A-Za-z]/.test(senha) && /[!@#$%*?&]/.test(senha);
-
-    if (!emailValido) {
-        alert('Por favor, insira um email válido.');
-        event.preventDefault();
-    } else if (!senhaValida) {
-        alert('A senha deve ter pelo menos 8 caracteres, incluindo números, letras e um caractere especial.');
-        event.preventDefault();
-    } else {
-        alert('Login realizado com sucesso!');
-        window.location.href = 'inicio.html';
+// Função para remover uma marmitaria específica
+function removerMarmitaria() {
+    const nome = prompt('Digite o nome da marmitaria que deseja remover:').trim();
+    if (!nome) {
+        alert('Nome inválido.');
+        return;
     }
+
+    let marmitarias = obterMarmitarias();
+    const novaLista = marmitarias.filter(marmitaria => marmitaria.nome !== nome || marmitaria.usuario !== usuarioAtual);
+
+    if (novaLista.length === marmitarias.length) {
+        alert('Marmitaria não encontrada ou você não tem permissão para removê-la.');
+        return;
+    }
+
+    salvarMarmitarias(novaLista);
+    alert('Marmitaria removida com sucesso!');
+    mostrarMarmitarias(); // Atualiza a lista na interface
 }
 
 // Função para cadastrar uma nova marmitaria
@@ -137,17 +167,23 @@ function cadastrarMarmitaria(event) {
         return;
     }
 
-    // Verificação de duplicação de marmitarias
+    // Verificação de duplicação de documentos e nomes
     const marmitarias = obterMarmitarias();
-    const marmitariaExistente = marmitarias.some(marmitaria => marmitaria.nome === nome);
-    if (marmitariaExistente) {
+    const documentoExistente = marmitarias.some(marmitaria => marmitaria.documento === documento);
+    const nomeExistente = marmitarias.some(marmitaria => marmitaria.nome === nome);
+    if (documentoExistente) {
+        alert('Já existe uma marmitaria com esse documento!');
+        event.preventDefault();
+        return;
+    }
+    if (nomeExistente) {
         alert('Já existe uma marmitaria com esse nome!');
         event.preventDefault();
         return;
     }
 
-    // Adiciona a nova marmitaria
-    marmitarias.push({ nome, tipo, documento, numDocumento });
+    // Adiciona a nova marmitaria com o email do usuário
+    marmitarias.push({ nome, tipo, documento, numDocumento, usuario: usuarioAtual });
 
     // Salva novamente no localStorage
     salvarMarmitarias(marmitarias);
@@ -175,14 +211,16 @@ function mostrarMarmitarias() {
     }
 
     document.getElementById('lista-marmitarias').style.display = 'block';
+    document.getElementById('remover-marmitarias-btn').style.display = 'inline-block'; // Exibe o botão de remover marmitarias
 }
 
-// Função para adicionar ações aos botões
 function adicionarAcoes() {
     document.getElementById('btn-senha')?.addEventListener('click', alternarSenha);
     document.getElementById('btn-submit-login')?.addEventListener('click', validarLogin);
     document.getElementById('btn-submit-marmitaria')?.addEventListener('click', cadastrarMarmitaria);
     document.getElementById('listar-marmitarias')?.addEventListener('click', mostrarMarmitarias);
+    document.getElementById('remover-marmitarias-btn')?.addEventListener('click', removerMarmitaria); // Adiciona ação para remover marmitarias
+    document.getElementById('sobre-nos-btn')?.addEventListener('click', mostrarSobreNos); // Adiciona ação para mostrar "Sobre Nós"
 
     // Botão de cadastro de marmitaria
     document.getElementById('cadastrar-btn')?.addEventListener('click', () => window.location.href = 'login_marmitaria.html');
@@ -191,10 +229,11 @@ function adicionarAcoes() {
     document.getElementById('entrar-btn')?.addEventListener('click', () => window.location.href = 'login.html');
 
     // Botão de cancelar, retorna à tela inicial
-    document.getElementById('cancelar-btn')?.addEventListener('click', () => window.location.href = 'inicio.html');
+    document.getElementById('cancelar-btn')?.addEventListener('click', () => window.location = 'inicio.html');
     
     // Botão de voltar para o login
     document.getElementById('voltar-btn')?.addEventListener('click', () => window.location.href = 'login.html');
 }
 
-adicionarAcoes(); 
+// Inicia a adição de ações ao carregar a página
+adicionarAcoes();
