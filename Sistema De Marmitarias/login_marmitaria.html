@@ -5,17 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Logotipo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <title>Marmitarias São Miguel - Cadastro Marmitaria</title>
+    <title>Marmitarias São Miguel - Cadastro Marmitaria/Restaurante</title>
 </head>
 <body>
-    <h1>Cadastro de Marmitaria</h1>
+    <h1>Cadastro de Estabelecimento</h1>
+
+    <div class="input-container">
+        <label for="tipoEstabelecimento">Tipo de Estabelecimento:</label>
+        <select id="tipoEstabelecimento">
+            <option value="marmitaria">Marmitaria</option>
+            <option value="restaurante">Restaurante</option>
+        </select>
+    </div>
+    <br>
     
     <div class="input-container">
         <label for="nome">Nome do Estabelecimento:</label>
-        <input type="text" id="nome" placeholder="Digite o nome da marmitaria">
-        <span id="nome-error" class="error-message"></span> <!-- Mensagem de erro -->
+        <input type="text" id="nome" placeholder="Digite o nome do estabelecimento">
+        <span id="nome-error" class="error-message"></span>
     </div>
-    <br><br>
+    <br>
     
     <div class="input-container">
         <label for="tipo">Tipo de Documento:</label>
@@ -24,30 +33,32 @@
             <option value="cnpj">CNPJ</option>
         </select>
     </div>
-    <br><br>
+    <br>
     
     <div class="input-container">
         <label for="documento">Documento (CPF/CNPJ):</label>
         <input type="text" id="documento" placeholder="000.000.000-00">
-        <span id="documento-error" class="error-message"></span> <!-- Mensagem de erro -->
+        <span id="documento-error" class="error-message"></span>
     </div>
-    <br><br>
+    <br>
     
     <div class="input-container">
         <label for="num_documento">Nº do Documento:</label>
         <input type="text" id="num_documento" placeholder="AB00000000/0000">
-        <span id="num-documento-error" class="error-message"></span> <!-- Mensagem de erro -->
+        <span id="num-documento-error" class="error-message"></span>
     </div>
-    <br><br>
+    <br>
     
     <div class="button-container">
         <button type="button" id="btn-submit-marmitaria">Cadastrar</button>
         <button type="button" onclick="window.location.href='inicio.html'">Cancelar</button>
     </div>
     
-    <!-- Mensagem de sucesso -->
     <div id="success-message" class="success-message"></div>
 
+    <script src="main.js"></script>
+</body>
+</html>
     <script src="main.js"></script>
 </body>
 </html>
